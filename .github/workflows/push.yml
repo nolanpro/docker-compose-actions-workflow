@@ -11,6 +11,8 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
       - uses: actions/checkout@v2
+      - name: debug context
+        run: echo ${{ toJson(github) }}
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
