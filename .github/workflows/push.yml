@@ -3,16 +3,12 @@ on: pull_request
 jobs:
   test:
     env:
-      message: ${{ github.event.head_commit.message }}
+      MESSAGE: ${{ github.event.pull_request.body }}
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: echo "$MESSAGE"
       - uses: actions/checkout@v2
-      - name: debug context
-        run: echo ${{ toJson(github) }}
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
