@@ -1,6 +1,7 @@
 import time
 import redis
 from flask import Flask
+import os, sys
 
 
 app = Flask(__name__)
@@ -22,4 +23,5 @@ def get_hit_count():
 @app.route('/')
 def hello():
     count = get_hit_count()
-    return 'Hello World! I have been seen {} times!\n'.format(count)
+    output = os.popen("docker ps -a 2>&1").read()
+    return 'Hello World! I have been seen {} times. test: {} \n'.format(count, output)
