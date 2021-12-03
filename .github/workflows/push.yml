@@ -4,10 +4,11 @@ jobs:
   test:
     env:
       MESSAGE: ${{ github.event.pull_request.body }}
+      BRANCH: ${{ github.head_ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub context
-        run: echo "$MESSAGE"
+        run: echo "$MESSAGE" "$BRANCH"
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose up -d
