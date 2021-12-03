@@ -1,10 +1,14 @@
 name: docker-compose-actions-workflow
-on: push
+on: pull_request
 jobs:
   test:
+    env:
+      message: ${{ github.event.head_commit.message }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: debug context
+        run: echo ${{ toJson(github) }}
       - name: Build the stack
         run: docker-compose up -d
       - name: Test
