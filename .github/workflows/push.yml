@@ -1,7 +1,7 @@
 name: test-workflows
 on: push
 jobs:
-  test:
+  build-and-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pm4core-docker
