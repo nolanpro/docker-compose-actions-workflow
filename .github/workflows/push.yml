@@ -1,16 +1,34 @@
-name: docker-compose-actions-workflow
-on: pull_request
+name: test-workflows
+on: push
 jobs:
   test:
-    env:
-      MESSAGE: ${{ github.event.pull_request.body }}
-      BRANCH: ${{ github.head_ref }}
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        run: echo "$MESSAGE" "$BRANCH"
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run: docker-compose up -d
+      - name: Checkout pm4core-docker
+        uses: actions/checkout@v2
+        with:
+          repository: 'ProcessMaker/pm4core-docker'
+          ref: 'v2'
+
+      - name: Checkout pm4-tools
+        uses: actions/checkout@v2
+        with:
+          repository: 'ProcessMaker/pm4-tools'
+          path: pmtools
+
+      - name: Cache build assets
+        uses: actions/cache@v2
+        with:
+          path: cache
+          key: ${{ runner.os }}-enterprise-build
+      
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+
+      - name: Build
+        run: docker-compose up builder
+        env:
+          GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
+      - name: Run App
+        run: docker-compose up -d app
       - name: Test
-        run: docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:5000/
+        run: docker-compose exec app phpunit
