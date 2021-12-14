@@ -7,15 +7,15 @@ jobs:
       - name: Checkout pm4core-docker
         uses: actions/checkout@v2
         with:
-          repository: 'ProcessMaker/pm4core-docker'
+          repository: 'processmaker/pm4core-docker'
           ref: 'v2'
-          token: ${{ secrets.PM_GITHUB_TOKEN }}
 
       - name: Checkout pm4-tools
         uses: actions/checkout@v2
         with:
           repository: 'ProcessMaker/pm4-tools'
           path: pmtools
+          token: ${{ secrets.PM_GITHUB_TOKEN }}
 
       - name: Cache build assets
         uses: actions/cache@v2
