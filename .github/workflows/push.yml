@@ -27,6 +27,10 @@ jobs:
 
       - name: Build Base
         run: docker-compose build base
+      
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Build Builder
         run: docker-compose build builder
       - name: Build App Using Builder
