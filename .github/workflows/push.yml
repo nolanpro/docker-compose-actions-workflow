@@ -25,7 +25,11 @@ jobs:
       
       - uses: satackey/action-docker-layer-caching@v0.0.11
 
-      - name: Build
+      - name: Build Base
+        run: docker-compose build base
+      - name: Build Builder
+        run: docker-compose build builder
+      - name: Build App Using Builder
         run: docker-compose up builder
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
