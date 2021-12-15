@@ -10,6 +10,9 @@ jobs:
           repository: 'processmaker/pm4core-docker'
           ref: 'v2'
 
+      - name: debug
+        run: echo ${{ github }}
+
       - name: Checkout pm4-tools
         uses: actions/checkout@v2
         with:
@@ -26,7 +29,7 @@ jobs:
           path: /home/runner/cache
           key: build-cache
       
-      
+
 
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
