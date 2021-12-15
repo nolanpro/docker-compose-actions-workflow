@@ -39,6 +39,6 @@ jobs:
       - name: Build Builder and Runner
         run: docker-compose build builder runner
       - name: Build and run tests
-        run: docker-compose up builder runner
+        run: docker-compose up --exit-code-from runner builder runner
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
