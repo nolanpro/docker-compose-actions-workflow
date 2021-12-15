@@ -13,6 +13,8 @@ jobs:
           ref: 'v2'
 
       - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
       - name: Checkout pm4-tools
