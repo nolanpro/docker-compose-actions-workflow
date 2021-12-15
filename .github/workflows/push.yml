@@ -28,13 +28,13 @@ jobs:
       - name: Build Base
         run: docker-compose build base
       
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
-      - name: Build Builder
-        run: docker-compose build builder
-      - name: Build App Using Builder
-        run: docker-compose up builder
+      - name: Build Builder and Runner
+        run: docker-compose build builder runner
+      - name: Build and run tests
+        run: docker-compose up builder runner
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
       - name: Run App
