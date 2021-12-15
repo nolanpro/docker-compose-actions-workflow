@@ -17,10 +17,13 @@ jobs:
           path: pm4-tools
           token: ${{ secrets.PM_GITHUB_TOKEN }}
 
+      - name: Make cache dir
+        run: mkdir -p /home/runner/cache
+
       - name: Cache build assets
         uses: actions/cache@v2
         with:
-          path: /cache
+          path: /home/runner/cache
           key: build-cache
       
       - name: Setup tmate session
