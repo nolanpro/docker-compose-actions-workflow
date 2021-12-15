@@ -1,5 +1,5 @@
 name: test-workflows
-on: push
+on: pull_request
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
