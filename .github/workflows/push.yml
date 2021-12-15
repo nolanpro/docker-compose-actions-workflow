@@ -20,7 +20,7 @@ jobs:
       - name: Cache build assets
         uses: actions/cache@v2
         with:
-          path: ./cache/
+          path: /cache
           key: build-cache
       
       - uses: satackey/action-docker-layer-caching@v0.0.11
