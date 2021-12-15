@@ -27,9 +27,16 @@ jobs:
 
       - name: Build Base
         run: docker-compose build base
+
+
+
+        
       
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
+
+
 
       - name: Build Builder and Runner
         run: docker-compose build builder runner
@@ -37,7 +44,3 @@ jobs:
         run: docker-compose up builder runner
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
-      - name: Run App
-        run: docker-compose up -d app
-      - name: Test
-        run: docker-compose exec app phpunit
