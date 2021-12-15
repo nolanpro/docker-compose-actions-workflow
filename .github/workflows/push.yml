@@ -10,8 +10,10 @@ jobs:
           repository: 'processmaker/pm4core-docker'
           ref: 'v2'
 
-      - name: debug
-        run: echo ${{ github }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Checkout pm4-tools
         uses: actions/checkout@v2
