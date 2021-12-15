@@ -23,20 +23,13 @@ jobs:
           path: /cache
           key: build-cache
       
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
       - uses: satackey/action-docker-layer-caching@v0.0.11
 
       - name: Build Base
         run: docker-compose build base
-
-
-
-
-      
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
-
-
 
       - name: Build Builder and Runner
         run: docker-compose build builder runner
