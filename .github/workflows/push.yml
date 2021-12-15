@@ -1,5 +1,7 @@
 name: test-workflows
-on: pull_request
+on:
+  pull_request:
+    types: [edited, opened, synchronize, reopened]
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
@@ -11,8 +13,6 @@ jobs:
           ref: 'v2'
 
       - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
 
       - name: Checkout pm4-tools
@@ -47,3 +47,4 @@ jobs:
         run: docker-compose up --exit-code-from runner builder runner
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
+          GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
