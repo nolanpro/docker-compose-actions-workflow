@@ -28,7 +28,9 @@ jobs:
           path: /home/runner/cache
           key: build-cache
 
-      # - uses: satackey/action-docker-layer-caching@v0.0.11
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        with:
+          key: cache-v1
 
       # - name: Build Base
       #   run: docker-compose build base
