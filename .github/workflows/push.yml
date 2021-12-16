@@ -50,3 +50,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
+          PHPUNIT_ARGS: ' --testdox tests/Model'
+      
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 10
