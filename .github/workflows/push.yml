@@ -12,11 +12,6 @@ jobs:
           repository: 'processmaker/pm4core-docker'
           ref: 'v2'
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Checkout pm4-tools
         uses: actions/checkout@v2
         with:
@@ -32,16 +27,11 @@ jobs:
         with:
           path: /home/runner/cache
           key: build-cache
-      
-
-
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
 
       - uses: satackey/action-docker-layer-caching@v0.0.11
 
-      - name: Build Base
-        run: docker-compose build base
+      # - name: Build Base
+      #   run: docker-compose build base
 
       - name: Build Builder and Runner
         run: docker-compose build builder runner
