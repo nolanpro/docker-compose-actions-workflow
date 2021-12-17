@@ -44,7 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
-          PHPUNIT_ARGS: ' --testdox'
+          PHPUNIT_ARGS: ' --testdox /code/pm4-packages/package-savedsearch/tests'
       
       - name: Setup tmate session
         if: ${{ failure() }}
