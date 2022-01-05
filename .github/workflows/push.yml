@@ -6,9 +6,6 @@ jobs:
   build-and-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Checkout pm4core-docker
         uses: actions/checkout@v2
         with:
@@ -23,3 +20,6 @@ jobs:
 
       - name: Install and run unit tests
         run: docker-compose up --exit-code-from install install
+      
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
