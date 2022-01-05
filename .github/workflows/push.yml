@@ -12,41 +12,11 @@ jobs:
           repository: 'processmaker/pm4core-docker'
           ref: 'v2'
 
-      - name: Checkout pm4-tools
-        uses: actions/checkout@v2
-        with:
-          repository: 'ProcessMaker/pm4-tools'
-          path: pm4-tools
-          token: ${{ secrets.PM_GITHUB_TOKEN }}
-
-      - name: Make cache dir
-        run: mkdir -p /home/runner/cache
-
-      - name: Cache build assets
-        uses: actions/cache@v2
-        with:
-          path: /home/runner/cache
-          key: build-cache
-
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        with:
-          key: v1-cache-{hash}
-          restore-keys: |
-            v1-cache-
-
-      # - name: Build Base
-      #   run: docker-compose build base
-
-      - name: Build Builder and Runner
-        run: docker-compose build builder runner
-      - name: Build and run tests
-        run: docker-compose up --exit-code-from runner builder runner
+      - name: Build
+        run: docker-compose build build
         env:
           GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
-          PHPUNIT_ARGS: ' --testdox /code/pm4-packages/package-savedsearch/tests'
-      
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 10
+
+      - name: Install and run unit tests
+        run: docker-compose run install
