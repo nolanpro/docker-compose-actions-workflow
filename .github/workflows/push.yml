@@ -19,7 +19,8 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
 
       - name: Install and run unit tests
-        run: docker-compose up --exit-code-from install install
+        # run: docker-compose up --exit-code-from install install
+        run: docker-compose up install
       
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
