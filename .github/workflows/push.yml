@@ -18,8 +18,8 @@ jobs:
           path: ${{ env.GITHUB_WORKSPACE }}/cache
           key: pm4-build-cache-v1
       
-      - name: test cache
-        run: mkdir -p cache && echo "foo" > cache/test.txt
+      # - name: test cache
+      #   run: mkdir -p cache && echo "foo" > cache/test.txt
       
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
