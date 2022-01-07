@@ -21,6 +21,9 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
 
+      - name: test cache
+        run: echo "foo" > ${{ env.GITHUB_WORKSPACE }}/cache/test.txt
+
       # - name: Install
       #   run: docker-compose run build
       #   env:
