@@ -12,15 +12,18 @@ jobs:
           repository: 'processmaker/pm4core-docker'
           ref: 'v2'
 
-      - name: Build
-        run: docker-compose build build
-        env:
-          GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
-          GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
-
-      - name: Install and run unit tests
-        # run: docker-compose up --exit-code-from install install
-        run: docker-compose up install
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: cache
+          key: pm4-build-cache-v1
       
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+
+      # - name: Install
+      #   run: docker-compose run build
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
+      #     GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
+      
