@@ -21,8 +21,8 @@ jobs:
       - name: create cache directory
         run: mkdir -p cache
 
-      - name: test cache 1
-        run: echo "baz" > cache/test.txt
+      # - name: test cache 1
+      #   run: echo "baz" > cache/test.txt
       
       - name: test cache 2
         run: cat cache/test.txt
