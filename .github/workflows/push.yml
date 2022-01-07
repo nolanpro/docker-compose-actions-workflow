@@ -25,6 +25,9 @@ jobs:
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
 
+      - name: Pull base image
+        run: docker pull nolanpro/pm4-ci-base:latest
+
       - name: Install
         run: docker-compose run builder
         env:
