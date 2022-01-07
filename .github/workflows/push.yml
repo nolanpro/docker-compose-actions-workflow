@@ -18,8 +18,8 @@ jobs:
           path: cache
           key: ${{ runner.os }}-build-cache
       
-      - name: test cache
-        run: mkdir -p cache && echo "bar" > cache/test.txt
+      # - name: test cache
+      #   run: mkdir -p cache && echo "bar" > cache/test.txt
 
       - name: test cache
         run: cat cache/test.txt
