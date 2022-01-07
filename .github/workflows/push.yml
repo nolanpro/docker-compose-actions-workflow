@@ -18,10 +18,13 @@ jobs:
           path: cache
           key: ${{ runner.os }}-build-cache-v1
       
-      - name: test cache
-        run: echo "bar" > cache/test.txt
+      - name: create cache directory
+        run: mkdir -p cache
 
-      - name: test cache
+      - name: test cache 1
+        run: echo "baz" > cache/test.txt
+      
+      - name: test cache 2
         run: cat cache/test.txt
       
       # - name: Setup tmate session
