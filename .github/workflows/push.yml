@@ -21,18 +21,13 @@ jobs:
       - name: create cache directory
         run: mkdir -p cache
 
-      # - name: test cache 1
-      #   run: echo "baz" > cache/test.txt
-      
-      - name: test cache 2
-        run: cat cache/test.txt
       
       # - name: Setup tmate session
       #   uses: mxschmitt/action-tmate@v3
 
-      # - name: Install
-      #   run: docker-compose run build
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
-      #     GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
+      - name: Install
+        run: docker-compose run builder
+        env:
+          GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
+          GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
       
