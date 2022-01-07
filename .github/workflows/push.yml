@@ -15,14 +15,14 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: /cache
+          path: cache
           key: pm4-build-cache-v1
       
-      # - name: test cache
-      #   run: mkdir -p cache && echo "foo" > cache/test.txt
+      - name: test cache
+        run: cat cache/test.txt
       
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
 
       # - name: Install
       #   run: docker-compose run build
