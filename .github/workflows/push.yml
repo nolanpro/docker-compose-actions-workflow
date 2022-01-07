@@ -15,7 +15,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: cache
+          path: /cache
           key: pm4-build-cache-v1
       
       # - name: test cache
