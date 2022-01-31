@@ -27,6 +27,6 @@ jobs:
       - name: Install
         run: docker-compose run builder
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PM_GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJSON(github.event.pull_request) }}
       
