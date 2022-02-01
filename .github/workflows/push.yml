@@ -11,6 +11,14 @@ jobs:
         with:
           repository: 'processmaker/pm4core-docker'
           ref: 'v2'
+      
+      - name: Checkout pm4-tools
+        uses: actions/checkout@v2
+        with:
+          repository: 'processmaker/pm4-tools'
+          ref: 'master'
+          token: ${{ secrets.PM_GITHUB_TOKEN }}
+          path: pm4-tools
 
       - name: Cache
         uses: actions/cache@v2
@@ -20,9 +28,6 @@ jobs:
       
       - name: create cache directory
         run: mkdir -p cache
-
-      - name: Pull base image
-        run: docker pull nolanpro/pm4-ci-base:latest
 
       - name: Install
         run: docker-compose run builder
