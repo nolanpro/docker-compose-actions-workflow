@@ -13,10 +13,12 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
-      - build
       - run:
           name: "clone pm4core-docker"
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 $CIRCLE_WORKING_DIRECTORY"
+      - run:
+          name: "set up example context"
+          command: source set_context_example.sh
       - run:
           name: "build the local cicd image and run tests"
           command: docker-compose run cicd
