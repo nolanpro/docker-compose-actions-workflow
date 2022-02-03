@@ -18,7 +18,7 @@ jobs:
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 $CIRCLE_WORKING_DIRECTORY"
       - run:
           name: "ls"
-          command: ls -la
+          command: pwd
       - run:
           name: "set up example context"
           command: source set_context_example.sh
