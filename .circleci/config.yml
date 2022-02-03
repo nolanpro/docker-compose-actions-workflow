@@ -19,15 +19,17 @@ jobs:
           name: "clone pm4core-docker"
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 ."
       - run:
-          name: "clone pm4-tools (temp until part of above repo)"
-          command: "git clone --depth 1 https://${PM_GITHUB_TOKEN}@github.com/processmaker/pm4-tools"
+          command: "ls -la /var/run/docker.sock"
+      # - run:
+      #     name: "clone pm4-tools (temp until part of above repo)"
+      #     command: "git clone --depth 1 https://${PM_GITHUB_TOKEN}@github.com/processmaker/pm4-tools"
           
-      - run:
-          name: "set up example context"
-          command: source set_context_example.sh
-      - run:
-          name: "build the local cicd image and run tests"
-          command: GITHUB_TOKEN=$PM_GITHUB_TOKEN docker-compose run -e BUILD_JAVASCRIPT=false  cicd
+      # - run:
+      #     name: "set up example context"
+      #     command: source set_context_example.sh
+      # - run:
+      #     name: "build the local cicd image and run tests"
+      #     command: GITHUB_TOKEN=$PM_GITHUB_TOKEN docker-compose run -e BUILD_JAVASCRIPT=false  cicd
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
