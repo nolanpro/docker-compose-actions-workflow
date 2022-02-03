@@ -13,6 +13,9 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
       - run:
           name: "clone pm4core-docker"
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 ."
