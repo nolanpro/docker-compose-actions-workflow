@@ -14,7 +14,6 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - setup_remote_docker:
-          version: 20.10.11
           docker_layer_caching: true
       - run:
           name: "clone pm4core-docker"
@@ -28,9 +27,7 @@ jobs:
           command: source set_context_example.sh
       - run:
           name: "build the local cicd image and run tests"
-          command: |
-            GITHUB_TOKEN=$PM_GITHUB_TOKEN
-            docker-compose run cicd
+          command: GITHUB_TOKEN=$PM_GITHUB_TOKEN docker-compose run cicd
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
