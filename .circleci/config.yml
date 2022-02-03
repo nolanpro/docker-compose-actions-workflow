@@ -2,14 +2,14 @@ version: 2.1
 
 jobs:
   build:
-    # machine:
-    #   image: ubuntu-2004:202111-02
-    docker:
-      - image: cimg/base:stable
+    machine:
+      image: ubuntu-2004:202111-02
+    # docker:
+    #   - image: cimg/base:stable
 
     steps:
-      - setup_remote_docker:
-          version: 19.03.13
+      # - setup_remote_docker:
+      #     version: 19.03.13
       - run:
           command: ls -la /var/run/docker.sock
       
