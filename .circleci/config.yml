@@ -5,7 +5,7 @@ jobs:
     # machine:
     #   image: ubuntu-2004:202111-02
     docker:
-      image: cimg/base:stable
+      - image: cimg/base:stable
 
     steps:
       - run:
