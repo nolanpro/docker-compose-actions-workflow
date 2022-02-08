@@ -2,13 +2,16 @@ version: 2.1
 
 jobs:
   build:
-    # machine:
-    #   image: ubuntu-2004:202111-02
     docker:
       - image: cimg/base:stable
 
     steps:
       - setup_remote_docker
+
+      - run:
+          name: "Identify << pipeline.project.git_url >>:<<pipeline.git.revision>>"
+          command: "echo << pipeline.project.git_url >>:<<pipeline.git.revision>>"
+
       - run:
           name: "clone pm4core-docker"
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 ."
