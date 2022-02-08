@@ -2,18 +2,13 @@ version: 2.1
 
 jobs:
   build:
-    machine:
-      image: ubuntu-2004:202111-02
-    # docker:
-    #   - image: cimg/base:stable
+    # machine:
+    #   image: ubuntu-2004:202111-02
+    docker:
+      - image: cimg/base:stable
 
     steps:
-      # - setup_remote_docker:
-      #     version: 19.03.13
-      - run:
-          command: ls -la /var/run/docker.sock
-      
-
+      - setup_remote_docker
       - run:
           name: "clone pm4core-docker"
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 ."
