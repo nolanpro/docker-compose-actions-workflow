@@ -6,12 +6,6 @@ jobs:
       - image: cimg/base:stable
 
     steps:
-      - restore_cache:
-          keys:
-            - build-cache
-      
-      - run:
-          command: "mkdir -p cache"
 
       - setup_remote_docker:
           docker_layer_caching: true
@@ -23,6 +17,13 @@ jobs:
       - run:
           name: "clone pm4core-docker"
           command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 ."
+      
+      - restore_cache:
+          keys:
+            - build-cache
+      
+      - run:
+          command: "mkdir -p cache"
           
       - run:
           name: "build the local cicd image and run tests"
