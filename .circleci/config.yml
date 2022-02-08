@@ -9,6 +9,9 @@ jobs:
       - restore_cache:
           keys:
             - build-cache
+      
+      - run:
+          command: "mkdir -p cache"
 
       - setup_remote_docker:
           docker_layer_caching: true
