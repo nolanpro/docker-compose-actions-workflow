@@ -9,8 +9,8 @@ jobs:
       - setup_remote_docker
 
       - run:
-          name: "Identify << pipeline.project.git_url >>:<<pipeline.git.revision>>"
-          command: "echo << pipeline.project.git_url >>:<<pipeline.git.revision>>"
+          name: "Identify << pipeline.project.git_url >>:<<pipeline.git.branch >>"
+          command: "echo << pipeline.project.git_url >>:<<pipeline.git.branch >>"
 
       - run:
           name: "clone pm4core-docker"
