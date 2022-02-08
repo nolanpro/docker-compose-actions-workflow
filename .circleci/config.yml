@@ -6,7 +6,12 @@ jobs:
       - image: cimg/base:stable
 
     steps:
-      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - build-cache
+
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       - run:
           name: "Identify << pipeline.project.git_url >>:<<pipeline.git.branch >>"
@@ -22,6 +27,11 @@ jobs:
             source set_context_example.sh
             export GITHUB_TOKEN=$PM_GITHUB_TOKEN
             docker-compose run -e BUILD_JAVASCRIPT=false cicd
+
+      - save_cache:
+          key: build-cache
+          paths:
+            - cache
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
