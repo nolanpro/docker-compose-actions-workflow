@@ -1,46 +1,25 @@
 version: 2.1
 
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the continuation orb is required in order to use dynamic configuration
+orbs:
+  continuation: circleci/continuation@0.1.2
+
+# our defined job, and its steps
 jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
-
+  setup:
+    executor: continuation/default
     steps:
+      - run: # run a command
+          name: Load config!
+          command: curl https://gist.githubusercontent.com/nolanpro/85916008e6f2ee2f4487d903a41c3894/raw/config.yml --output core_config.yml
+      - continuation/continue:
+          configuration_path: core_config.yml # use newly generated config to continue
 
-      - setup_remote_docker:
-          version: 19.03.14
-          docker_layer_caching: true
-
-      - run:
-          name: "Identify << pipeline.project.git_url >>:<<pipeline.git.branch >>"
-          command: "echo << pipeline.project.git_url >>:<<pipeline.git.branch >>"
-
-      - run:
-          name: "clone pm4core-docker"
-          command: "git clone --depth 1 https://github.com/ProcessMaker/pm4core-docker.git -b v2 ."
-      
-      - restore_cache:
-          keys:
-            - build-cache
-      
-      - run:
-          command: "mkdir -p cache"
-          
-      - run:
-          name: "build the local cicd image and run tests"
-          command: |
-            source set_context_example.sh
-            export GITHUB_TOKEN=$PM_GITHUB_TOKEN
-            docker-compose run -e BUILD_JAVASCRIPT=false cicd
-
-      - save_cache:
-          key: build-cache
-          paths:
-            - cache
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+# our single workflow, that triggers the setup job defined above
 workflows:
-  say-hello-workflow:
+  setup:
     jobs:
-      - build
+      - setup
