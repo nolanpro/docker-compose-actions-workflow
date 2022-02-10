@@ -1,5 +1,10 @@
 version: 2.1
 
+parameters:
+  triggered_from:
+    type: string
+    default: "circleci ui"
+
 # this allows you to use CircleCI's dynamic configuration feature
 setup: true
 
