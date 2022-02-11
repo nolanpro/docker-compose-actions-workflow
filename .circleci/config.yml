@@ -1,30 +1,47 @@
 version: 2.1
 
+version: 2.1
+
 parameters:
-  triggered_from:
+  package_branch:
     type: string
-    default: "circleci ui"
+    default: "null"
+  package_url:
+    type: string
+    default: "null"
+  sha:
+    type: string
+    default: "null"
+  project:
+    type: string
+    default: "null"
+  pull_req_id:
+    type: string
+    default: "null"
+  body:
+    type: string
+    default: "null"
 
-# this allows you to use CircleCI's dynamic configuration feature
-setup: true
+defaults: &defaults
+  environment:
+    TERM: xterm
+    LC_ALL: en_US.UTF-8
+  working_directory: ~/repo
 
-# the continuation orb is required in order to use dynamic configuration
-orbs:
-  continuation: circleci/continuation@0.1.2
-
-# our defined job, and its steps
 jobs:
-  setup:
-    executor: continuation/default
-    steps:
-      - run: # run a command
-          name: Load config!
-          command: curl https://gist.githubusercontent.com/nolanpro/85916008e6f2ee2f4487d903a41c3894/raw/config.yml --output core_config.yml
-      - continuation/continue:
-          configuration_path: core_config.yml # use newly generated config to continue
+  job:
+    docker:
+      - image: cimg/base:stable
+    - run:
+          name: 'build the local cicd image and run tests'
+          command: |
+            CI_PR_BODY="<<pipeline.parameters.body>>" \
+            CI_PROJECT="<<pipeline.parameters.project>>" \
+            CI_PACKAGE_BRANCH="<<pipeline.parameters.package_branch>>" \
+            echo "Got body $CI_PR_BODY project: $CI_PROJECT branch: $CI_PACKAGE_BRANCH"
 
 # our single workflow, that triggers the setup job defined above
 workflows:
-  setup:
+  test:
     jobs:
-      - setup
+      - job
