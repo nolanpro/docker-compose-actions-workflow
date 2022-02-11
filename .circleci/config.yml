@@ -27,7 +27,7 @@ defaults: &defaults
   working_directory: ~/repo
 
 jobs:
-  <<pipeline.parameters.project>>:
+  "<<pipeline.parameters.project>>":
     docker:
       - image: cimg/base:stable
     steps:
@@ -44,6 +44,6 @@ jobs:
 
 # our single workflow, that triggers the setup job defined above
 workflows:
-  <<pipeline.parameters.project>>:
+  "<<pipeline.parameters.project>>":
     jobs:
       - job
