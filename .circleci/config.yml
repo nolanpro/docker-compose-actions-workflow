@@ -1,7 +1,5 @@
 version: 2.1
 
-version: 2.1
-
 parameters:
   package_branch:
     type: string
@@ -32,13 +30,14 @@ jobs:
   job:
     docker:
       - image: cimg/base:stable
-    - run:
-          name: 'build the local cicd image and run tests'
-          command: |
-            CI_PR_BODY="<<pipeline.parameters.body>>" \
-            CI_PROJECT="<<pipeline.parameters.project>>" \
-            CI_PACKAGE_BRANCH="<<pipeline.parameters.package_branch>>" \
-            echo "Got body $CI_PR_BODY project: $CI_PROJECT branch: $CI_PACKAGE_BRANCH"
+    steps:
+      - run:
+            name: 'build the local cicd image and run tests'
+            command: |
+              CI_PR_BODY="<<pipeline.parameters.body>>" \
+              CI_PROJECT="<<pipeline.parameters.project>>" \
+              CI_PACKAGE_BRANCH="<<pipeline.parameters.package_branch>>" \
+              echo "Got body $CI_PR_BODY project: $CI_PROJECT branch: $CI_PACKAGE_BRANCH"
 
 # our single workflow, that triggers the setup job defined above
 workflows:
